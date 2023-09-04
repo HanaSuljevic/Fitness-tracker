@@ -1,0 +1,20 @@
+<section class="new-training-container">
+    <form (ngSubmit) = "onStartTraining(f)" #f="ngForm">
+      <mat-card class="card-container">
+        <mat-card-title class="position-center">Time to start a workout!</mat-card-title>
+        <mat-card-content class="position-center">
+            <mat-form-field>
+                <mat-label>Choose Exercise</mat-label>
+                <mat-select ngModel name="exercise" required>
+                  <mat-option *ngFor="let exercise of exercises" [value]="exercise.id">
+                    {{ exercise.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </mat-card-content> 
+        <mat-card-actions class="position-center">
+            <button type="submit" mat-button [disabled]="f.invalid">Start</button>
+        </mat-card-actions>
+    </mat-card>
+    </form>
+</section>

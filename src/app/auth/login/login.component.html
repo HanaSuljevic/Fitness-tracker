@@ -1,0 +1,40 @@
+<section class="login-form-container">
+    <form class="login-form" [formGroup]="loginForm">
+        <mat-form-field>
+            <input 
+              type="email" 
+              matInput 
+              placeholder="Your email"
+              formControlName="email"
+              ngSubmit="onSubmit()">
+            <mat-hint>Please enter valid email.</mat-hint>
+            <mat-error>Invalid or invalid email.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input 
+              type="password" 
+              matInput 
+              placeholder="Your password"
+              formControlName="password">
+            <mat-hint>Please enter your password.</mat-hint>
+            <mat-error>Missing password.</mat-error>
+        </mat-form-field>
+        <button type="submit" style="margin-top: 10px;" mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="onSubmit()">Submit</button>
+    </form>
+</section>
+
+<!-- <section class="login-form-container">
+    <form class="login-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <mat-form-field hintLabel="Enter your email">
+            <input type="email" matInput placeholder="E-Mail" email required ngModel name="email" #emailInput="ngModel">
+            <mat-error *ngIf="emailInput.hasError('required')">E-mail can't be empty</mat-error>
+            <mat-error *ngIf="!emailInput.hasError('required')">Incorrect email</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="password" matInput placeholder="Password" required ngModel name="password">
+            <mat-error>Incorrect parword</mat-error>
+            <mat-hint>Enter your password</mat-hint>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="f.invalid">Login</button>
+    </form>
+</section> -->

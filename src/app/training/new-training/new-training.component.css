@@ -1,0 +1,15 @@
+.position-center {
+    display: flex;
+    justify-content: center;
+}
+.new-training-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.card-container {
+    width: 400px;
+}
