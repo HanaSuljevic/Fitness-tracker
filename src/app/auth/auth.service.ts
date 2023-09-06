@@ -8,7 +8,7 @@ import { User } from "./user.model";
 @Injectable() 
 export class AuthService {
     authChange = new Subject<boolean>(); 
-    private user!: User;
+    private user!: User | null;
 
     constructor(private router: Router) {}
     
@@ -30,10 +30,7 @@ export class AuthService {
     }
 
     logout() {
-        this.user = {
-            email: "", 
-            userId: ""
-        };
+        this.user = null;
         this.authChange.next(false);
         this.router.navigate(['/login'])
     }
@@ -43,7 +40,8 @@ export class AuthService {
     }
 
     isAuth() { 
-        if(this.user.email != "" && this.user.userId != "")
+        console.log('usr', this.user)
+        if(this.user != null)
             return true 
         else 
             return false; 
@@ -53,7 +51,4 @@ export class AuthService {
         this.authChange.next(true);
         this.router.navigate(['/training']);
     }
-
-
-
 }

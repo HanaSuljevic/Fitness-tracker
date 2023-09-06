@@ -19,7 +19,13 @@ import { StopTrainingComponent } from './training/current-training/stop-training
 
 import { AuthService } from './auth/auth.service';
 import { TrainingService } from './training/training.service';
+import { environment } from 'src/environments/environment';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,9 +47,16 @@ import { TrainingService } from './training/training.service';
     BrowserAnimationsModule, 
     FormsModule, 
     ReactiveFormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()),
+    AngularFirestoreModule
   ],
-  providers: [AuthService, TrainingService],
+  providers: [
+    AuthService, TrainingService, AngularFirestore,
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+  ],
   bootstrap: [AppComponent], 
   entryComponents: [StopTrainingComponent]
 })
 export class AppModule { }
+
+

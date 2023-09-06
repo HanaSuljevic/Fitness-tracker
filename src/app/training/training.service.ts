@@ -24,15 +24,31 @@ export class TrainingService {
     }
 
     completeExercise() {
-        this.exercises.push({...this.runningExercise!, date: new Date(), state: 'complated'});
+        this.exercises.push({
+            ...this.runningExercise!, 
+            date: new Date(),
+            state: 'complated'
+        });
         this.runningExercise = undefined;
         this.exerciseChanged.next(null);
     }
 
-    cancelExercise() {
-
+    cancelExercise(process: number) {
+        this.exercises.push({
+            ...this.runningExercise!,
+            duration: this.runningExercise!.duration * (process / 100),
+            calories: this.runningExercise!.duration * (process / 100),
+            date: new Date(),
+            state: 'cancelled'
+        });
+        this.runningExercise = undefined;
+        this.exerciseChanged.next(null);
     }
     getRunningExercise() {
         return { ...this.runningExercise };
+    }
+
+    getComplatedOrCancelledExercises() {
+        return this.exercises.slice();
     }
 }
